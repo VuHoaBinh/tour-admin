@@ -41,7 +41,7 @@ const LoginScreen = () => {
 
   const handleClickSubmit = () => {
     handleSubmit((values) => {
-      // login({ email, password } as LoginBody);
+      login({ email, password } as LoginBody);
       login(values as LoginBody);
     })();
     
