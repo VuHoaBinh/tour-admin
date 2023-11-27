@@ -8,17 +8,22 @@ import { useDispatch } from 'react-redux';
 import { signIn, signOut } from 'reducers/profileSlice';
 import { authService } from 'services';
 import { RoleEnum } from 'utils/enum';
+import { useState } from "react";
+
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
+
+  const [email, setEmail] = useState('admindev');  // Default email
+  const [password, setPassword] = useState('123123');
 
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
   const { mutate: login, isPending } = useMutation({
     mutationFn: authService.login,
     onSuccess: (data: LoginResponse) => {
-      if (data.role !== RoleEnum.ADMIN) {
+      if (data.role !== RoleEnum.ADMIN && data.role !== RoleEnum.USER) {
         enqueueSnackbar('Bạn không có quyền truy cập', { variant: 'error' });
         dispatch(signOut({}));
         return;
@@ -36,8 +41,10 @@ const LoginScreen = () => {
 
   const handleClickSubmit = () => {
     handleSubmit((values) => {
+      // login({ email, password } as LoginBody);
       login(values as LoginBody);
     })();
+    
   };
 
   return (
@@ -58,6 +65,11 @@ const LoginScreen = () => {
               label='Email'
               error={!!error}
               helperText={error?.message}
+              placeholder = "tk:admindev"
+              onChange={(e) => {
+                field.onChange(e);  
+                setEmail(e.target.value);  
+              }}
             />
           )}
         />
@@ -77,6 +89,11 @@ const LoginScreen = () => {
               onKeyDown={handleKeyDown}
               error={!!error}
               helperText={error?.message}
+              placeholder = "pass:123123"
+              onChange={(e) => {
+                field.onChange(e);  
+                setPassword(e.target.value);  
+              }}
             />
           )}
         />
