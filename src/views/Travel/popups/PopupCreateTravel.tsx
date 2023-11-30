@@ -39,6 +39,10 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Tên không được để trống',
+                pattern: {
+                  value: /^[^\d]+$/,
+                  message: 'Name không hợp lệ',
+                }, 
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
@@ -53,6 +57,10 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Mô tả không được để trống',
+                minLength: {
+                  value: 10,
+                  message: 'Tên phải có ít nhất 10 ký tự',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
@@ -74,7 +82,13 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               name='price'
               defaultValue=''
               control={control}
-              rules={{ required: 'Giá trị không được để trống' }}
+              rules={{ 
+                required: 'Giá trị không được để trống',
+                pattern: {
+                  value: /^[1-9]{1}[0-9]$/,
+                  message: 'Giá không hợp lệ',
+                }, 
+              }}
               render={({ field, fieldState: { error } }) => (
                 <TextField
                   {...field}
@@ -94,6 +108,10 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Ảnh không được để trống',
+                pattern: {
+                  value: /\.(jpg|jpeg|png)$/i,
+                  message: 'Chỉ chấp nhận các định dạng ảnh jpg, jpeg, png',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (

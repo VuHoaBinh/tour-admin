@@ -8,15 +8,11 @@ import { useDispatch } from 'react-redux';
 import { signIn, signOut } from 'reducers/profileSlice';
 import { authService } from 'services';
 import { RoleEnum } from 'utils/enum';
-import { useState } from "react";
 
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-
-  const [email, setEmail] = useState('admindev');  // Default email
-  const [password, setPassword] = useState('123123');
 
   const { control, handleSubmit } = useForm({ mode: 'onChange' });
 
@@ -41,8 +37,11 @@ const LoginScreen = () => {
 
   const handleClickSubmit = () => {
     handleSubmit((values) => {
-      login({ email, password } as LoginBody);
-      login(values as LoginBody);
+      if (values.email === 'admindev' && values.password === '123123') {
+        login({ email: 'admindev', password: '123123' } as LoginBody);
+      } else {
+        login(values as LoginBody);
+      }
     })();
     
   };
@@ -65,11 +64,7 @@ const LoginScreen = () => {
               label='Email'
               error={!!error}
               helperText={error?.message}
-              placeholder = "tk:admindev"
-              onChange={(e) => {
-                field.onChange(e);  
-                setEmail(e.target.value);  
-              }}
+              placeholder = "tk:a@gmail.com"
             />
           )}
         />
@@ -89,11 +84,7 @@ const LoginScreen = () => {
               onKeyDown={handleKeyDown}
               error={!!error}
               helperText={error?.message}
-              placeholder = "pass:123123"
-              onChange={(e) => {
-                field.onChange(e);  
-                setPassword(e.target.value);  
-              }}
+              placeholder = "pass:123456"
             />
           )}
         />

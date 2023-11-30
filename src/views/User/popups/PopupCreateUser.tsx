@@ -38,6 +38,10 @@ const PopupCreateUser = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Tên không được để trống',
+                minLength: {
+                  value: 3,
+                  message: 'Tên phải có ít nhất 3 ký tự',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
@@ -52,6 +56,10 @@ const PopupCreateUser = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Email không được để trống',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@gmail.com$/i,
+                  message: 'Email không hợp lệ',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
@@ -66,6 +74,10 @@ const PopupCreateUser = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Mật khẩu không được để trống',
+                minLength: {
+                  value: 8,
+                  message: 'Pass phải có ít nhất 8 ký tự',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
