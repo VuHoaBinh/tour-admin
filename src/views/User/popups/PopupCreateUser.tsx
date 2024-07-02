@@ -24,6 +24,8 @@ const PopupCreateUser = ({ onClose }: PopupController) => {
         ...(values as UserPayloadType),
       });
     })();
+    alert('Tạo tài khoản thành công!!!');
+    onClose();
   };
 
   return (

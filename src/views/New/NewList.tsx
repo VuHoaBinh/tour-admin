@@ -53,7 +53,7 @@ const TravelList = () => {
                 <TableCell>Tên</TableCell>
                 <TableCell>Ảnh</TableCell>
                 <TableCell>Mô tả</TableCell>
-                <TableCell></TableCell>
+                <TableCell>Loại</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -61,7 +61,7 @@ const TravelList = () => {
                 <TableRow key={item.id}>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>
-                    <img src={item.image} alt={item.name} className='h-40' />
+                    <img src={item.image} alt={item.name} style={{ height: 'auto', width: 'auto' }} />
                   </TableCell>
                   <TableCell>{item.description}</TableCell>
                   <TableCell align='center'>
@@ -75,7 +75,7 @@ const TravelList = () => {
                           setOpenUpdatePopup(true);
                         }}
                       >
-                        Cập nhật
+                        Sửa
                       </Button>
                       <Button
                         variant='outlined'

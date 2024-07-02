@@ -67,7 +67,7 @@ const TravelList = () => {
                   <TableCell>{item.description}</TableCell>
                   <TableCell>{formatNumber(item.price)}</TableCell>
                   <TableCell>
-                    <img src={item.image} alt={item.name} className='h-40' />
+                    <img src={item.image} alt={item.name} style={{ height: 'auto', width: 'auto' }} />
                   </TableCell>
                   <TableCell>{item.domain}</TableCell>
                   <TableCell>{item.type}</TableCell>
@@ -82,7 +82,7 @@ const TravelList = () => {
                           setOpenUpdatePopup(true);
                         }}
                       >
-                        Cập nhật
+                        Sửa
                       </Button>
                       <Button
                         variant='outlined'

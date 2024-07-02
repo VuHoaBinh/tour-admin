@@ -9,7 +9,6 @@ import { signIn, signOut } from 'reducers/profileSlice';
 import { authService } from 'services';
 import { RoleEnum } from 'utils/enum';
 
-
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -19,7 +18,7 @@ const LoginScreen = () => {
   const { mutate: login, isPending } = useMutation({
     mutationFn: authService.login,
     onSuccess: (data: LoginResponse) => {
-      if (data.role !== RoleEnum.ADMIN && data.role !== RoleEnum.USER) {
+      if (data.role !== RoleEnum.ADMIN) {
         enqueueSnackbar('Bạn không có quyền truy cập', { variant: 'error' });
         dispatch(signOut({}));
         return;
@@ -43,7 +42,6 @@ const LoginScreen = () => {
         login(values as LoginBody);
       }
     })();
-    
   };
 
   return (
@@ -64,7 +62,7 @@ const LoginScreen = () => {
               label='Email'
               error={!!error}
               helperText={error?.message}
-              placeholder = "tk:a@gmail.com"
+              placeholder='tk:sunnyTravel_admin@gmail.com'
             />
           )}
         />
@@ -84,7 +82,7 @@ const LoginScreen = () => {
               onKeyDown={handleKeyDown}
               error={!!error}
               helperText={error?.message}
-              placeholder = "pass:123456"
+              placeholder='password'
             />
           )}
         />

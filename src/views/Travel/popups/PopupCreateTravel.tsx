@@ -24,6 +24,7 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
       createTravel({
         ...(values as TravelPayloadType),
       });
+      alert('Tạo thành công Tour.');
     })();
   };
 
@@ -40,13 +41,13 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               rules={{
                 required: 'Tên không được để trống',
                 pattern: {
-                  value: /^[^\d]+$/,
-                  message: 'Name không hợp lệ',
-                }, 
+                  value: /^[A-Z]{1}[^\d@#!$%^&*()]*$/,
+                  message: 'Tên viết hoa chữ cái đầu, không chứa ký tự số và ký tự đặc biệt',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
-                <TextField {...field} fullWidth label='Tên' error={!!error} helperText={error?.message} />
+                <TextField {...field} fullWidth label='Tên tour' error={!!error} helperText={error?.message} />
               )}
             />
           </Grid>
@@ -59,7 +60,7 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
                 required: 'Mô tả không được để trống',
                 minLength: {
                   value: 10,
-                  message: 'Tên phải có ít nhất 10 ký tự',
+                  message: 'Tên phải có ít nhất 10 ký tự hoặc số',
                 },
               }}
               control={control}
@@ -82,12 +83,12 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               name='price'
               defaultValue=''
               control={control}
-              rules={{ 
+              rules={{
                 required: 'Giá trị không được để trống',
                 pattern: {
                   value: /^[1-9]{1}[0-9]$/,
                   message: 'Giá không hợp lệ',
-                }, 
+                },
               }}
               render={({ field, fieldState: { error } }) => (
                 <TextField
@@ -108,14 +109,10 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               defaultValue=''
               rules={{
                 required: 'Ảnh không được để trống',
-                pattern: {
-                  value: /\.(jpg|jpeg|png)$/i,
-                  message: 'Chỉ chấp nhận các định dạng ảnh jpg, jpeg, png',
-                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
-                <TextField {...field} fullWidth label='Ảnh' error={!!error} helperText={error?.message} />
+                <TextField {...field} fullWidth label='Link Ảnh' error={!!error} helperText={error?.message} />
               )}
             />
           </Grid>
@@ -126,7 +123,7 @@ const PopupCreateTravel = ({ onClose }: PopupController) => {
               defaultValue={DOMAIN_TYPES[0].code}
               control={control}
               render={({ field }) => (
-                <TextField {...field} fullWidth select label='Miền'>
+                <TextField {...field} fullWidth select label='Khu vực'>
                   {DOMAIN_TYPES.map((item, index) => (
                     <MenuItem key={index} value={item.code}>
                       {item.label}

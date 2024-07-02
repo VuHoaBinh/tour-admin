@@ -20,6 +20,7 @@ const PopupDelete = ({ id, onClose }: PopupProps) => {
 
   const handleDelete = () => {
     deleteTravel({ id });
+    alert('Xóa thành công Tour.');
   };
 
   return (

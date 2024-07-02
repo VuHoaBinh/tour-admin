@@ -51,10 +51,14 @@ const PopupUpdateNew = ({ item, onClose }: PopupProps) => {
               defaultValue=''
               rules={{
                 required: 'Tên không được để trống',
+                pattern: {
+                  value: /^[A-Z]{1}[^\d@#!$%^&*()]*$/,
+                  message: 'Tên viết hoa chữ cái đầu, không chứa ký tự số và ký tự đặc biệt',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
-                <TextField {...field} fullWidth label='Tên' error={!!error} helperText={error?.message} />
+                <TextField {...field} fullWidth label='Chủ đề thông tin' error={!!error} helperText={error?.message} />
               )}
             />
           </Grid>

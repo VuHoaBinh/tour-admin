@@ -16,7 +16,7 @@ const privateRoute = {
   },
   order: {
     path: '/orders',
-    name: 'Danh sách orders',
+    name: 'Danh sách đặt tour',
     component: <OrderList />,
   },
   new: {

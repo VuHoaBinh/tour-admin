@@ -30,6 +30,7 @@ const PopupUpdateTravel = ({ item, onClose }: PopupProps) => {
         id: item.id,
         ...values,
       });
+      alert('Cập nhật thành công Tour.');
     })();
   };
 
@@ -53,10 +54,14 @@ const PopupUpdateTravel = ({ item, onClose }: PopupProps) => {
               defaultValue=''
               rules={{
                 required: 'Tên không được để trống',
+                pattern: {
+                  value: /^[A-Z]{1}[^\d@#!$%^&*()]*$/,
+                  message: 'Tên viết hoa chữ cái đầu, không chứa ký tự số và ký tự đặc biệt',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
-                <TextField {...field} fullWidth label='Tên' error={!!error} helperText={error?.message} />
+                <TextField {...field} fullWidth label='Tên Tour' error={!!error} helperText={error?.message} />
               )}
             />
           </Grid>
@@ -67,6 +72,10 @@ const PopupUpdateTravel = ({ item, onClose }: PopupProps) => {
               defaultValue=''
               rules={{
                 required: 'Mô tả không được để trống',
+                minLength: {
+                  value: 10,
+                  message: 'Tên phải có ít nhất 10 ký tự hoặc số',
+                },
               }}
               control={control}
               render={({ field, fieldState: { error } }) => (
