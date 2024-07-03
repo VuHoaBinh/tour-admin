@@ -4,8 +4,8 @@ export enum RoleEnum {
 }
 
 export const USER_TYPES = [
-  { code: 'USER', label: 'User' },
   { code: 'ADMIN', label: 'Admin' },
+  // { code: 'USER', label: 'User' },
 ];
 
 export const ORDER_STATUS_TYPES = [
